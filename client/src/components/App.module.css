@@ -1,0 +1,7 @@
+@import '../globalStyles/styles.module.css';
+
+
+.App {
+  text-align: center;
+  color: var(--colorLight);
+}

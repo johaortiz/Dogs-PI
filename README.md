@@ -1,3 +1,71 @@
+# Estructura
+
+```
+client/
+|
+|---node_modules/
+|
+|---public/
+|   |---favicon.ico
+|   |---index.html
+|   |---manifest.json
+|   |---robots.txt
+|
+|---src/
+|   |---index.js
+|   |---index.module.css
+|   |---package.json
+|   |---README.md
+|   |
+|   |---globalStyles
+|   |   |---styles.module.css
+|   |
+|   |---components/
+|   |   |---App.js
+|   |   |---App.module.css
+|   |   |
+|   |   |---Landing/
+|   |   |   |---Landing.jsx
+|   |   |   |---Landing.module.jsx
+|   |   |
+|   |   |
+|   |---redux/
+|   |   |---store.js
+|   |   |
+|   |   |---slices/
+|   |   |   |---a/
+|   |   |   |   |---index.js
+|   |   |   |
+|   |   |   |---darkMode/
+|   |   |   |   |---index.js
+|
+|
+|
+|
+|
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
 
 # Individual Project - Henry Dogs
