@@ -6,14 +6,17 @@ const { Dog, Temperament } = require('../db');
 
 const getDogsfromApi = async () => {
     const response = await axios.get('https://api.thedogapi.com/v1/breeds');
-    const dogs = response.data?.map((dog) => dogsTemplate(dog));
+    const dogs = response.data?.map((dog) => dogsTemplate(dog, dog.image.url));
     return dogs;
 };
 
 const getDogsByName = async (name) => {
-    const response = await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`);
-    const dogs = response.data?.map((dog) => dogsTemplate(dog));
-    return dogs;
+    const dogsApi = await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`);
+    const filterDogsApi = dogsApi.data?.map((dog) => dogsTemplate(dog, dog.reference_image_id));
+    const dogsDB = await getDogsByDB();
+    const filterDogsDB = dogsDB.filter((dog) => dog.name.toLowerCase().includes(name.toLowerCase()));
+    const dogsUnion = [...filterDogsDB, ...filterDogsApi];
+    return dogsUnion;
 };
 
 const getDogsById = async (id) => {
@@ -43,12 +46,10 @@ const getDogs = async () => {
 
 
 //Template----------------------------------------------------------------------------------------------------------------------------------
-const dogsTemplate = (dog) => {
+const dogsTemplate = (dog, imageDog) => {
+    console.log(dog)
     if (dog.id.toString().length < 4) {
-        // dog.id = `${'0'.repeat(4 - dog.id.toString().length)}${dog.id}`;
-        const image = !dog.image.id
-            ? 'https://thumbs.dreamstime.com/b/dog-error-page-not-found-template-webpage-landing-illustrator-vector-188039604.jpg'
-            : `https://cdn2.thedogapi.com/images/${dog.image.id}.jpg`;
+        const image = `https://cdn2.thedogapi.com/images/${imageDog}.jpg`;
         const filterDog = {
             id: dog.id.toString(),
             name: dog.name,
@@ -58,6 +59,7 @@ const dogsTemplate = (dog) => {
             height: dog.height.metric,
             life_span: dog.life_span,
         };
+        console.log(filterDog);
         return filterDog;
     } else {
         const temperament = dog.temperaments.map((temperament) => temperament.name);

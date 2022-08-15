@@ -7,7 +7,9 @@ export const darkModeSlice = createSlice({
         allDogs: [],
         listingDogs: [],
         dogPage: 0,
-
+        searchDogs: [],
+        viewDogsFoundedByName: [],
+        dogPageSearch: 0,
     },
     reducers: {
         dogsSetter: (state, action) => {
@@ -18,11 +20,27 @@ export const darkModeSlice = createSlice({
         },
         dogPage: (state, action) => {
             state.dogPage = action.payload;
-        }
+        },
+        searchDogs: (state, action) => {
+            state.searchDogs = action.payload;
+        },
+        viewDogsFoundedByName: (state, action) => {
+            state.viewDogsFoundedByName = action.payload;
+        },
+        dogPageSearch: (state, action) => {
+            state.dogPageSearch = action.payload;
+        },
+
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { dogsSetter, listDogs, dogPage } = darkModeSlice.actions
+export const { dogsSetter,
+    listDogs,
+    dogPage,
+    searchDogs,
+    viewDogsFoundedByName,
+    dogPageSearch
+} = darkModeSlice.actions
 
 export default darkModeSlice.reducer
