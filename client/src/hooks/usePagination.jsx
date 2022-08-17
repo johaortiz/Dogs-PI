@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { dogsSetter, listDogs, dogPage, viewDogsFoundedByName, dogPageSearch } from '../redux/slices/dogs';
 import { getAllDogs } from '../utils/requests';
 
 export const usePagination = () => {
+
+    const allDogs = useSelector(state => state.dogs.allDogs);
 
     //Without search bar 
     const dogsList = useSelector(state => state.dogs.listingDogs);

@@ -6,25 +6,24 @@ const router = Router();
 
 router.post('/', async (req, res) => {
 
-    const { name, height, weight, life_span, image, temperaments } = req.body;
+    const { name, height, weightMin, weightMax, life_span, image, temperaments } = req.body;
 
     try {
         const dog = await Dog.findOrCreate({
             where: {
                 name,
                 height,
-                weight,
+                weightMin,
+                weightMax,
                 life_span,
-                image
+                image,
             },
         });
 
         const temperamentDb = await Temperament.findAll({ where: { name: temperaments } });
-        const finalTemperaments = temperamentDb?.map((temperament) => temperament.dataValues.name);
-        
         dog[0].addTemperament(temperamentDb);
 
-        if(dog[1]) {
+        if (dog[1]) {
             res.status(201).json({
                 message: 'Dog created successfully',
                 dog: dog[0]

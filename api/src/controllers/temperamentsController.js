@@ -4,7 +4,7 @@ const { getDogsfromApi } = require('./dogsController');
 
 const getTemperaments = async () => {
     try {
-        
+
         const temperaments = await Temperament.findAll({ attributes: ['name'] });
 
         if (temperaments.length < 1) {
@@ -12,7 +12,7 @@ const getTemperaments = async () => {
             const dogs = await getDogsfromApi();
             const temperament = dogs?.map((dog) => dog.temperament ? dog.temperament : 'No-defined');
             const filterTemperament = [...new Set(temperament.join(',').replace(/ /g, '').split(',').sort())];
-            filterTemperament?.forEach(async (temperament) => await Temperament.findOrCreate({ where: { name: temperament } }));
+            filterTemperament?.map(async (temperament) => await Temperament.findOrCreate({ where: { name: temperament } }));
 
             return filterTemperament;
 

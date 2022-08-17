@@ -9,3 +9,8 @@ export const getDogByName = (name) => {
     const dog = axios.get(`http://localhost:3001/dogs/${name}`);
     return dog;
 };
+
+export const getTemperaments = () => {
+    const temperament = axios.get('http://localhost:3001/temperaments');
+    return temperament;
+}

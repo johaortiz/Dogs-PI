@@ -47,19 +47,53 @@ const getDogs = async () => {
 
 //Template----------------------------------------------------------------------------------------------------------------------------------
 const dogsTemplate = (dog, imageDog) => {
-    console.log(dog)
     if (dog.id.toString().length < 4) {
         const image = `https://cdn2.thedogapi.com/images/${imageDog}.jpg`;
+        const weightTotal = dog.weight.metric.split('-');
+        let weightMin;
+        let weightMax;
+        //REFACTORIZAR
+        if (weightTotal.length > 1) { //si hay un rango de peso
+            const first = parseInt(weightTotal[0]);
+            const second = parseInt(weightTotal[1]);
+            if (!isNaN(first) && !isNaN(second)) { //si el primer valor es un numero y el segundo es un numero
+                weightMin = first;
+                weightMax = second;
+            } else if (isNaN(first) && !isNaN(second)) { //si el primer valor no es un numero y el segundo es un numero
+                weightMin = second;
+                weightMax = second;
+            } else if (!isNaN(first) && isNaN(second)) { //si el primer valor es un numero y el segundo no es un numero
+                weightMin = first;
+                weightMax = first;
+            } else if (isNaN(first) && isNaN(second)) { //si el primer valor no es un numero y el segundo no es un numero
+                weightMin = 7;
+                weightMax = 7;
+            }
+        } else if (weightTotal.length === 1) {
+            const first = parseInt(weightTotal[0]);
+            if (!isNaN(first)) { //si el primer valor es un numero
+                weightMin = first;
+                weightMax = first;
+            } else if (isNaN(first)) { //si el primer valor no es un numero
+                weightMin = 7;
+                weightMax = 7;
+            }
+        } else {
+            weightMin = 7;
+            weightMax = 7;
+        }
+    let temperament = dog.temperament ? dog.temperament : 'No-defined';
+
         const filterDog = {
             id: dog.id.toString(),
             name: dog.name,
             image: image,
-            temperament: dog.temperament,
-            weight: dog.weight.metric,
+            temperament: temperament,
+            weightMin,
+            weightMax,
             height: dog.height.metric,
             life_span: dog.life_span,
         };
-        console.log(filterDog);
         return filterDog;
     } else {
         const temperament = dog.temperaments.map((temperament) => temperament.name);
@@ -68,7 +102,8 @@ const dogsTemplate = (dog, imageDog) => {
             name: dog.name,
             image: dog.image,
             temperament: temperament.join(', '),
-            weight: dog.weight,
+            weightMin: dog.weightMin,
+            weightMax: dog.weightMax,
             height: dog.height,
             life_span: dog.life_span,
         };
