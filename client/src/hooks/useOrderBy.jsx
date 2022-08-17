@@ -13,8 +13,13 @@ export const useOrderBy = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(sorteds(allDogs));
-        orderBy(select);
+        if (searchDogs.length > 0) {
+            dispatch(sorteds(allDogs));
+            orderBy(select);
+        } else {
+            dispatch(sorteds(searchDogs));
+            orderBy(select);
+        }
     }, [allDogs, searchDogs, select]);
 
 
@@ -120,7 +125,6 @@ export const useOrderBy = () => {
                 }
                 const finalArr = [...new Set(newArr)];
                 dispatch(sorteds(finalArr));
-                console.log(finalArr)
             }
             if (value === 'default') {
                 dispatch(sorteds(allDogs));
@@ -223,7 +227,6 @@ export const useOrderBy = () => {
                 }
                 const finalArr = [...new Set(newArr)];
                 dispatch(sorteds(finalArr));
-                console.log(finalArr)
             }
             if (value === 'default') {
                 dispatch(sorteds(searchDogs));

@@ -4,38 +4,39 @@ import { createSlice } from '@reduxjs/toolkit';
 export const darkModeSlice = createSlice({
     name: 'dogs',
     initialState: {
-        allDogs: [],                    // all dogs in the system
-        searchDogs: [],                 // dogs filtered by search
-        sortedsDogs: [],                // dogs sorted
-        filters: [],                    // filters of dogs
-        temperaments: [],               // temperaments of dogs of DB
-        selectedTemperament: [],        // selected temperaments of dogs
+        allDogs: [],                                // all dogs in the system
+        temperaments: [],                           // temperaments of dogs of DB
+        searchDogs: [],                             // dogs filtered by search
+        //----------------------------------------------------------------------------------------------------------------------
+        viewDogsFoundedByName: [],                  // dogs founded by name????????????
+        sortedsDogs: [],                            // dogs sorted
+        filters: [],                                // filters of dogs
+        filtersTemp: [],                            // filters by user
+        //----------------------------------------------------------------------------------------------------------------------
+        selectedTemperament: [],                    // selected temperaments by user
 
-        listingDogs: [],                // dogs divided in 8
-        dogPage: 0,                     // current page of dogs
-        viewDogsFoundedByName: [],
+        //----------------------------------------------------------------------------------------------------------------------
+
+        listingDogs: [],                            // dogs divided in 8
+        dogPage: 0,                                 // current page of dogs
         dogPageSearch: 0,
 
 
     },
     reducers: {
+        //-------------------------------------------------Initial---------------------------------------------------------------
         dogsSetter: (state, action) => {
             state.allDogs = action.payload;
         },
-        listDogs: (state, action) => {
-            state.listingDogs = action.payload;
-        },
-        dogPage: (state, action) => {
-            state.dogPage = action.payload;
+        temperamentsSet: (state, action) => {
+            state.temperaments = action.payload;
         },
         searchDogs: (state, action) => {
             state.searchDogs = action.payload;
         },
+        //----------------------------------------------------------------------------------------------------------------------
         viewDogsFoundedByName: (state, action) => {
             state.viewDogsFoundedByName = action.payload;
-        },
-        dogPageSearch: (state, action) => {
-            state.dogPageSearch = action.payload;
         },
         sorteds: (state, action) => {
             state.sortedsDogs = action.payload;
@@ -43,9 +44,23 @@ export const darkModeSlice = createSlice({
         filters: (state, action) => {
             state.filters = action.payload;
         },
-        temperamentsSet: (state, action) => {
-            state.temperaments = action.payload;
+        filtersTempSet: (state, action) => {
+            state.filtersTemp = action.payload;
         },
+        //----------------------------------------------------------------------------------------------------------------------
+
+        listDogs: (state, action) => {
+            state.listingDogs = action.payload;
+        },
+        dogPage: (state, action) => {
+            state.dogPage = action.payload;
+        },
+
+        dogPageSearch: (state, action) => {
+            state.dogPageSearch = action.payload;
+        },
+
+        //-----------------------------------------------------User?------------------------------------------------------------
         selectedTemperamentSet: (state, action) => {
             state.selectedTemperament = [...state.selectedTemperament, action.payload];
         },
@@ -66,6 +81,7 @@ export const { dogsSetter,
     filters,
     temperamentsSet,
     selectedTemperamentSet,
-    deleteTempretamentSet } = darkModeSlice.actions;
+    deleteTempretamentSet,
+    filtersTempSet } = darkModeSlice.actions;
 
 export default darkModeSlice.reducer

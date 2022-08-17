@@ -28,5 +28,5 @@ export const useSetSearchBar = () => {
         setSearch(e.target.value);
     };
 
-    return [search, handleChange, debounce];
+    return [search, handleChange];
 }

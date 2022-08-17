@@ -5,7 +5,7 @@ import { filters } from "../redux/slices/dogs";
 
 export const useFilter = () => {
 
-    
+
     const [select, setSelect] = useState('default');
     const dispatch = useDispatch();
 
@@ -23,20 +23,18 @@ export const useFilter = () => {
     };
 
     const filterBy = (value) => {
-        if (searchDogs < 1) {
-            if (value === 'api') {
-                const filter = sortedsDogs.filter(dog => {
-                    return dog.id.length < 4
-                })
-                dispatch(filters(filter));
-            } else if (value === 'db') {
-                const filter = sortedsDogs.filter(dog => {
-                    return dog.id.length > 4
-                })
-                dispatch(filters(filter));
-            } else if (value === 'default') {
-                dispatch(filters(sortedsDogs));
-            }
+        if (value === 'api') {
+            const filter = sortedsDogs.filter(dog => {
+                return dog.id.length < 4
+            })
+            dispatch(filters(filter));
+        } else if (value === 'db') {
+            const filter = sortedsDogs.filter(dog => {
+                return dog.id.length > 4
+            })
+            dispatch(filters(filter));
+        } else if (value === 'default') {
+            dispatch(filters(sortedsDogs));
         }
     }
     return [select, selected];

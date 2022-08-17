@@ -5,7 +5,8 @@ import { getAllDogs } from '../utils/requests';
 
 export const usePagination = () => {
 
-    const allDogs = useSelector(state => state.dogs.allDogs);
+
+    const filtersTemp = useSelector(state => state.dogs.filtersTemp);
 
     //Without search bar 
     const dogsList = useSelector(state => state.dogs.listingDogs);
@@ -14,37 +15,24 @@ export const usePagination = () => {
 
     //Whit search bar
     const searchDogs = useSelector(state => state.dogs.searchDogs);
-    const pageSearch = useSelector(state => state.dogs.dogPageSearch);
     const viewDogs = useSelector(state => state.dogs.viewDogsFoundedByName);
+    const pageSearch = useSelector(state => state.dogs.dogPageSearch);
+
 
 
     useEffect(() => {
-        if (searchDogs.length < 1) {
-            getAllDogs().then(dogs => {
-                dispatch(dogsSetter(dogs.data));
-                return dogs.data;
-            }).then((dogs) => {
-                let auxDogsList = [];
-                for (let i = 0; i < dogs.length; i += 8) {
-                    auxDogsList.push(dogs.slice(i, i + 8));
-                }
-                dispatch(listDogs(auxDogsList));
-            });
-        }
+        getAllDogs().then(dogs => {
+            dispatch(dogsSetter(dogs.data));
+            return dogs.data;
+        });
     }, []);
 
-
     useEffect(() => {
-        if (searchDogs.length > 1) {
-            let auxDogsList = [];
-            for (let i = 0; i < searchDogs.length; i += 8) {
-                auxDogsList.push(searchDogs.slice(i, i + 8));
-            }
-            dispatch(viewDogsFoundedByName(auxDogsList));
-        } else {
-            dispatch(dogPageSearch(0));
-        }
-    }, [searchDogs]);
+        let auxDogsList = [];
+        for (let i = 0; i < filtersTemp.length; i += 8) {
+            auxDogsList.push(filtersTemp.slice(i, i + 8));
+        } dispatch(listDogs(auxDogsList));
+    }, [filtersTemp, searchDogs]);
 
 
 
@@ -78,7 +66,7 @@ export const usePagination = () => {
             }
         } else if (searchDogs.length > 0) {
             const check = pageSearch + 1;
-            if (check > viewDogs.length - 1) {
+            if (check > dogsList.length - 1) {
                 return;
             } else {
                 return dispatch(dogPageSearch(pageSearch + 1));

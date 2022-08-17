@@ -1,48 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Filters } from '../Filters/Filters';
-import { Pagination } from '../Pagination/Pagination';
-import { SearchBar } from '../SearchBar/SearchBar';
-import { Sorters } from '../Sorters/Sorters';
-import { temperamentsSet, selectedTemperamentSet } from '../../redux/slices/dogs';
-import { CardSelectedTemperament } from '../CardSelectedTemperament/CardSelectedTemperament';
-import { TemperamentsOptions } from '../Filters/TemperamentsOptions';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { BtnsFilters } from '../BtnsFilters/BtnsFilters';
 
 export const Home = () => {
 
+    //Without search bar
     const dogsList = useSelector(state => state.dogs.listingDogs);
     const page = useSelector(state => state.dogs.dogPage);
+
+    //Whit search bar
     const searchDogs = useSelector(state => state.dogs.searchDogs);
-    const viewDogs = useSelector(state => state.dogs.viewDogsFoundedByName);
-    const pageSearch = useSelector(state => state.dogs.dogPageSearch);
-
-    const selectedTemperament = useSelector(state => state.dogs.selectedTemperament);
-    const temperaments = useSelector(state => state.dogs.temperaments);
-
-    useEffect(() => {
-        
-    }, [selectedTemperament])
-
-
-
+    const dogPageSearch = useSelector(state => state.dogs.dogPageSearch);
 
 
 
     return (
         <div>
-            <SearchBar />
-            <Pagination />
-            <Sorters />
-            <Filters />
-            <TemperamentsOptions />
-            {searchDogs.length < 1 ? dogsList[page]?.map(dogs => {
+            <BtnsFilters />
+            {searchDogs.length > 0 ? dogsList[dogPageSearch]?.map(dogs => {
                 return <div key={dogs.id} >{dogs.name}</div>
-            }) : viewDogs[pageSearch]?.map(dogs => {
+            }) : dogsList[page]?.map(dogs => {
                 return <div key={dogs.id} >{dogs.name}</div>
             })}
-            <div>{selectedTemperament?.map(select => {
-                return <CardSelectedTemperament key={select} select={select} />
-            })}</div>
+
         </div>
-    )
-}
+    );
+};
