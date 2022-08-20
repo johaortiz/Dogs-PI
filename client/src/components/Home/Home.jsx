@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BtnsFilters } from '../BtnsFilters/BtnsFilters';
+import { Cards } from '../Cards/Cards';
+import styles from './Home.module.css';
 
 export const Home = () => {
 
@@ -17,11 +19,13 @@ export const Home = () => {
     return (
         <div>
             <BtnsFilters />
-            {searchDogs.length > 0 ? dogsList[dogPageSearch]?.map(dogs => {
-                return <div key={dogs.id} >{dogs.name}</div>
-            }) : dogsList[page]?.map(dogs => {
-                return <div key={dogs.id} >{dogs.name}</div>
-            })}
+            <div className={styles.home }> 
+                {searchDogs.length > 0 ? dogsList[dogPageSearch]?.map(dogs => {
+                    return <Cards key={dogs.id} dog={dogs} />
+                }) : dogsList[page]?.map(dogs => {
+                    return <Cards key={dogs.id} dog={dogs} />
+                })}
+            </div>
 
         </div>
     );

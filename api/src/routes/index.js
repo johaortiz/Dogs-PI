@@ -5,6 +5,7 @@ const getDogsId = require('./getDogsId');
 const getTemperaments = require('./getTemperaments');
 const postDog = require('./postDog');
 
+
 const router = Router();
 
 router.use('/dogs', getDogs);

@@ -6,7 +6,7 @@ const { Dog, Temperament } = require('../db');
 
 const getDogsfromApi = async () => {
     const response = await axios.get('https://api.thedogapi.com/v1/breeds');
-    const dogs = response.data?.map((dog) => dogsTemplate(dog, dog.image.url));
+    const dogs = response.data?.map((dog) => dogsTemplate(dog, dog.image.id));
     return dogs;
 };
 

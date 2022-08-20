@@ -1,0 +1,9 @@
+@import '../../globalStyles/styles.module.css';
+
+.home {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 2rem;
+    padding: 3rem;
+    justify-content: center;
+}
