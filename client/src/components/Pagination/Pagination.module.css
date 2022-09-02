@@ -1,0 +1,20 @@
+.div{
+margin-top: 1rem;
+} 
+
+.prev, .next {
+    cursor: pointer;
+    border: none;
+    background-color: var(--colorLight);
+    color: var(--colorDark);
+    font-size: .9rem;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease-in-out;
+    text-justify: auto;
+}
+
+.label {
+    font-size: 1.3rem;
+    padding: .5rem;
+}

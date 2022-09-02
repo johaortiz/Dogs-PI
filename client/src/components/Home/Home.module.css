@@ -7,3 +7,15 @@
     padding: 3rem;
     justify-content: center;
 }
+
+.homeI {
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    margin-top: 3em;
+    max-width: 200px;
+    height: auto;
+    width: auto/9;
+}

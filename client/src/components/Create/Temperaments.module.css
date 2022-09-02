@@ -1,0 +1,10 @@
+.slc {
+    padding: 15px;
+    border-radius: 10px;
+    outline: currentcolor none medium;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    width: 40%;
+    height: 3%;
+}

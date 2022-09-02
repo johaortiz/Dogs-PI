@@ -1,25 +1,20 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom'
-import { getDogById } from '../../utils/requests';
+import React from 'react';
+import { useDogDetail } from '../../hooks/useDogDetail';
+import styles from './Details.module.css';
+import { BackHome } from '../BtnsFilters/BackHome';
 
 export const Details = () => {
 
-    const notFound = 'https://thumbs.dreamstime.com/b/dog-error-page-not-found-template-webpage-landing-illustrator-vector-188039604.jpg';
-    const [dog, setDog] = useState(null);
+    const [dog, notFound] = useDogDetail();
 
-    const { id } = useParams();
-    useEffect(() => {
-        getDogById(id).then((dog) => {
-            setDog(dog.data)
-        });
-    }, [id]);
 
     return (
-        <div>
+        <div className={styles.detailsContainer}>
             {dog
-                ? <div>
-                    <img src={dog.image}
+                ? <div className={styles.columns}>
+                    <img
+                        className={styles.image}
+                        src={dog.image}
                         alt={notFound}
                         height={300}
                         onError={event => {
@@ -27,11 +22,14 @@ export const Details = () => {
                             event.onerror = null;
                         }}
                     />
-                    <p>Name: {dog.name}</p>
-                    <p>Temperaments: {dog.temperament.replace(/, /g, " ~ ")}</p>
-                    <p>Height: {dog.height.replace(/-/g, " ~ ")}</p>
-                    <p>Weight: {dog.weightMin}~{dog.weightMax}</p>
-                    <p>Life Span: {dog.life_span.replace(/-/g, " ~ ")}</p>
+                    <span className={styles.text}>
+                        <p>Name: {dog.name}</p>
+                        <p>Temperaments: {dog.temperament.replace(/, /g, " ~ ")}</p>
+                        <p>Height: {dog.height.replace(/-/g, " ~ ")}</p>
+                        <p>Weight: {dog.weightMin}~{dog.weightMax}</p>
+                        <p>Life Span: {dog.life_span.replace(/-/g, " ~ ")}</p>
+                    </span>
+                    <BackHome />
                 </div>
                 : <div>Loading...</div>}
 

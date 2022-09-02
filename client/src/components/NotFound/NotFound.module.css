@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    height: 100vh;
+}
+
+.img {
+    border-radius: 4em;
+}
+
+.btn {
+    font-size: 1em;
+    width: 13em;
+    height: 2em;
+    border-width: 1px;
+    color: #333;
+    border-color: var(--colorLight);
+    border-radius: 2em;
+    box-shadow: 0 0 .5em 0 rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 .5em 0 rgba(0, 0, 0, 0.5);
+    background: var(--colorDark);
+}
+
+.btn:hover {
+    box-shadow: 0 0 .5em 0 rgba(0, 0, 0, 0.8);
+}

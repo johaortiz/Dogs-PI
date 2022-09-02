@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { usePagination } from '../../hooks/usePagination';
+import styles from './Pagination.module.css';
 
 export const Pagination = () => {
 
@@ -14,10 +15,10 @@ export const Pagination = () => {
 
 
     return (
-        <div >
-            <button onClick={prev}>Prev</button>
-            <label>{searchDogs.length < 1 ? page + 1 : pageSearch + 1}</label>
-            <button onClick={next}>Next</button>
+        <div className={styles.div} >
+            <button onClick={prev} className={styles.prev}  >Prev</button>
+            <label className={styles.label} >{searchDogs.length < 1 ? page + 1 : pageSearch + 1}</label>
+            <button onClick={next} className={styles.next}  >Next</button>
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { getDogByName } from '../utils/requests';
-import { searchDogs } from '../redux/slices/dogs';
+import { searchDogs, searchValue } from '../redux/slices/dogs';
 import { useDebounce } from './useDebounce';
 
 export const useSetSearchBar = () => {
@@ -20,12 +20,14 @@ export const useSetSearchBar = () => {
             })
         } else {
             dispatch(searchDogs([]));
+            dispatch(searchValue(''));
         }
     }, [debounce]);
 
     const handleChange = async (e) => {
         e.preventDefault();
         setSearch(e.target.value);
+        dispatch(searchValue(e.target.value));
     };
 
     return [search, handleChange];

@@ -19,3 +19,26 @@ export const getDogById = (id) => {
     const dog = axios.get(`http://localhost:3001/dogs/detail/${id}`);
     return dog;
 };
+
+export const postDogs = (dog, temperaments) => {
+    const options = {
+        method: 'POST',
+        url: 'http://localhost:3001/dogs',
+        data: {
+            name: dog.name,
+            image: dog.image,
+            weightMin: dog.weightMin,
+            weightMax: dog.weightMax,
+            height: `${dog.heightMin} - ${dog.heightMax}`,
+            life_span: `${dog.life_spanMin} - ${dog.life_spanMax}`,
+            temperaments
+        }
+    };
+
+    axios.request(options).then((response) => {
+        console.log(response.data);
+    }).catch((error) => {
+        console.error(error);
+    });
+
+}

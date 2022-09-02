@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { dogsSetter, listDogs, dogPage, viewDogsFoundedByName, dogPageSearch } from '../redux/slices/dogs';
+import { dogsSetter, listDogs, dogPage, dogPageSearch } from '../redux/slices/dogs';
 import { getAllDogs } from '../utils/requests';
 
 export const usePagination = () => {
@@ -15,7 +15,6 @@ export const usePagination = () => {
 
     //Whit search bar
     const searchDogs = useSelector(state => state.dogs.searchDogs);
-    const viewDogs = useSelector(state => state.dogs.viewDogsFoundedByName);
     const pageSearch = useSelector(state => state.dogs.dogPageSearch);
 
 
@@ -32,8 +31,17 @@ export const usePagination = () => {
         for (let i = 0; i < filtersTemp.length; i += 8) {
             auxDogsList.push(filtersTemp.slice(i, i + 8));
         } dispatch(listDogs(auxDogsList));
-    }, [filtersTemp, searchDogs]);
+        if (searchDogs.length < 1) {
+            dispatch(dogPageSearch(0));
+            if (auxDogsList.length < page) {
+                dispatch(dogPage(auxDogsList.length - 1))
+            };
+        };
+        if (searchDogs.length > 1 && auxDogsList.length < pageSearch) {
+            dispatch(dogPageSearch(auxDogsList.length - 1));
+        };
 
+    }, [filtersTemp, searchDogs]);
 
 
     const prev = (e) => {

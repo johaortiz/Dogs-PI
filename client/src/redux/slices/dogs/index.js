@@ -8,15 +8,13 @@ export const darkModeSlice = createSlice({
         temperaments: [],                           // temperaments of dogs of DB
         searchDogs: [],                             // dogs filtered by search
         //----------------------------------------------------------------------------------------------------------------------
-        viewDogsFoundedByName: [],                  // dogs founded by name????????????
         sortedsDogs: [],                            // dogs sorted
         filters: [],                                // filters of dogs
         filtersTemp: [],                            // filters by user
         //----------------------------------------------------------------------------------------------------------------------
         selectedTemperament: [],                    // selected temperaments by user
-
+        searchValue: '',                            // 
         //----------------------------------------------------------------------------------------------------------------------
-
         listingDogs: [],                            // dogs divided in 8
         dogPage: 0,                                 // current page of dogs
         dogPageSearch: 0,
@@ -35,9 +33,7 @@ export const darkModeSlice = createSlice({
             state.searchDogs = action.payload;
         },
         //----------------------------------------------------------------------------------------------------------------------
-        viewDogsFoundedByName: (state, action) => {
-            state.viewDogsFoundedByName = action.payload;
-        },
+
         sorteds: (state, action) => {
             state.sortedsDogs = action.payload;
         },
@@ -66,6 +62,9 @@ export const darkModeSlice = createSlice({
         },
         deleteTempretamentSet: (state, action) => {
             state.selectedTemperament = state.selectedTemperament.filter(item => item !== action.payload);
+        },
+        searchValue: (state, action) => {
+            state.searchValue = action.payload;
         }
     },
 })
@@ -75,13 +74,13 @@ export const { dogsSetter,
     listDogs,
     dogPage,
     searchDogs,
-    viewDogsFoundedByName,
     dogPageSearch,
     sorteds,
     filters,
     temperamentsSet,
     selectedTemperamentSet,
     deleteTempretamentSet,
-    filtersTempSet } = darkModeSlice.actions;
+    filtersTempSet,
+    searchValue, } = darkModeSlice.actions;
 
 export default darkModeSlice.reducer

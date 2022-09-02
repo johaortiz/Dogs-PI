@@ -17,8 +17,9 @@
 }
 
 .image {
-    height: 200px;
+    max-height: 200px;
     width: 100%;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
+

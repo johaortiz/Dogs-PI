@@ -5,6 +5,32 @@
     align-items: center;
     justify-content: space-around;
     height: 100vh;
-    background: linear-gradient(90deg, rgba(255, 160, 26, 1) 8%, rgba(255, 196, 42, 1) 32%, rgba(255, 222, 95, 1) 62%, rgba(255, 252, 133, 1) 88%);
 }
 
+.bgImage {
+    background-image: url("https://wallpaperaccess.com/full/3845801.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    position: relative;
+}
+
+.h {
+    margin: 0;
+}
+
+.btn {
+    background-color: transparent;
+    padding: 7px;
+    font-size: 1.2rem;
+    box-shadow: 0 0 .5em 0 rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 .5em 0 rgba(0, 0, 0, 0.5);
+    transition: all .2s;
+}
+
+
+.btn:hover {
+    box-shadow: 0 0 .5em 0 rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.4);
+}

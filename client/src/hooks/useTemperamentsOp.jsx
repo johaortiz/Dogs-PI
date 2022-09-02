@@ -17,30 +17,37 @@ export const useTemperamentsOp = () => {
         getTemperaments().then(temperament => {
             dispatch(temperamentsSet(temperament.data));
         })
-    }, [])
+    }, [dispatch])
 
+    
+    //Horrenda forma de hacer, pero React me chilla que sea así 
     useEffect(() => {
+
+        const temperamentsFilterSet = (temperamentsSelects) => {
+            let filtered = [];
+            filters.forEach(dog => {
+                temperamentsSelects.forEach((temp, i) => {
+                    if (manualController(dog, temp, temperamentsSelects)) {
+                        if (!filtered.includes(dog)) {
+                            filtered.push(dog);
+                        };
+                    };
+                });
+            });
+            dispatch(filtersTempSet(filtered));
+        };
+
+        
         if (selectedTemperament.length === 0) {
             dispatch(filtersTempSet(filters));
         } else {
             temperamentsFilterSet(selectedTemperament)
         }
-    }, [selectedTemperament, searchDogs, filters]);
+
+    }, [selectedTemperament, searchDogs, filters, dispatch]);
 
 
-    const temperamentsFilterSet = (temperamentsSelects) => {
-        let filtered = [];
-        filters.forEach(dog => {
-            temperamentsSelects.forEach((temp, i) => {
-                if (manualController(dog, temp, temperamentsSelects)) {
-                    if (!filtered.includes(dog)) {
-                        filtered.push(dog);
-                    };
-                };
-            });
-        });
-        dispatch(filtersTempSet(filtered));
-    }
+
 
     const manualController = (dog, temp, i) => {
         if (i.length === 1) {
@@ -61,24 +68,6 @@ export const useTemperamentsOp = () => {
             } else {
                 return false
             }
-        } else if (i.length === 4) {
-            if (dog.temperament.includes(i[0]) && dog.temperament.includes(i[1]) && dog.temperament.includes(i[2]) && dog.temperament.includes(i[3])) {
-                return dog
-            } else {
-                return false
-            }
-        } else if (i.length === 5) {
-            if (dog.temperament.includes(i[0]) && dog.temperament.includes(i[1]) && dog.temperament.includes(i[2]) && dog.temperament.includes(i[3]) && dog.temperament.includes(i[4])) {
-                return dog
-            } else {
-                return false
-            }
-        } else if (i.length === 6) {
-            if (dog.temperament.includes(i[0]) && dog.temperament.includes(i[1]) && dog.temperament.includes(i[2]) && dog.temperament.includes(i[3]) && dog.temperament.includes(i[4]) && dog.temperament.includes(i[5])) {
-                return dog
-            } else {
-                return false
-            }
         } else {
             return false
         };
@@ -87,12 +76,17 @@ export const useTemperamentsOp = () => {
 
     const handleChange = (event) => {
         const value = event.target.value;
-        dispatch(selectedTemperamentSet(value));
-        const filter = temperaments.filter(temperament => {
-            return temperament !== value
-        })
-        dispatch(temperamentsSet(filter));
+        if (selectedTemperament.length < 3) {
+            dispatch(selectedTemperamentSet(value));
+            const filter = temperaments.filter(temperament => {
+                return temperament !== value
+            })
+            dispatch(temperamentsSet(filter));
+        } else {
+            alert('Cannot add more Temps...')
+        }
     }
+
 
     return [handleChange];
 }

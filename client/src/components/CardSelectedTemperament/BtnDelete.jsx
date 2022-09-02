@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectedTemperamentSet, temperamentsSet, deleteTempretamentSet } from '../../redux/slices/dogs';
+import { temperamentsSet, deleteTempretamentSet } from '../../redux/slices/dogs';
+import styles from './CardSelected.module.css';
+
 
 export const BtnDelete = ({ select }) => {
 
@@ -17,6 +19,6 @@ export const BtnDelete = ({ select }) => {
 
 
     return (
-        <span id={select} onClick={handleClick} >X</span>
+        <span id={select} onClick={handleClick} className={styles.close} >x</span>
     )
 }

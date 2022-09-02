@@ -12,6 +12,6 @@ router.use('/dogs', getDogs);
 router.use('/dogs/', getDogsByName);
 router.use('/dogs/detail/', getDogsId);
 router.use('/temperaments', getTemperaments);
-router.use('/create', postDog);
+router.use('/dogs', postDog);
 
 module.exports = router;
